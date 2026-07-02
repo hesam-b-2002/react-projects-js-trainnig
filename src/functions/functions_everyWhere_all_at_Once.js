@@ -46,6 +46,7 @@ export const Functoins_what_do_they_know_do_they_know_things_lets_find_out =
     //     }
     //   },
     // };
+    // //  nested funtions in a methpodes accesess --- >
     // let object = {
     //   value: "value ",
     //   methode: function () {
@@ -59,4 +60,27 @@ export const Functoins_what_do_they_know_do_they_know_things_lets_find_out =
     //   },
     // };
     // object.methode();
+    // // funtions invoked with more or fewer parameters ---- >
+    // function getPropertyName(arg, optionalArg) {
+    //   optionalArg = optionalArg || [];
+    //   if (!optionalArg)
+    //     for (let property in arg) {
+    //       optionalArg.push(property);
+    //     }
+    //   console.log(`nqme : ${arg}, surname : ${optionalArg}`);
+    //   return arg;
+    // }
+    // let argName = [" name"];
+    // getPropertyName(argName);
+    // veriadic functions --- >
+    // function max(firstArg, ...rest) {
+    //   let maxValue = firstArg;
+    //   for (let number of rest) {
+    //     if (number > maxValue) {
+    //       maxValue = number;
+    //     }
+    //   }
+    //   return maxValue;
+    // }
+    // let arr = [1, 2, 1241241, 124125132513, 547536, 245867969];
   };
