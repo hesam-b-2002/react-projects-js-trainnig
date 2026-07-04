@@ -24,7 +24,7 @@ function expresion --->
 
 diffrence between the two --->
 
->           function decleration decleres a varible and assign the function to it ,        
+>           function declerations , declere a varible and assign the function to it ,        
 
 >          function expression is up to me to assign to a const , var or another function
 
@@ -64,7 +64,7 @@ nested functions --- >
                 }
 
 
->       nested functions in an objects methode , dont inherit the (this) that refers to the owner of methode  
+>       nested functions in an objects methode , dont inherit the (this) that refers to the object 
 
 >       properties , fortunally there are tricks :
 
@@ -120,9 +120,9 @@ function invocation in strictMode ---- >
 
 >    they call this shit (this methode ) invocation context
 
->    in strict mode this is undifined 
+>    in strict mode it is undifined 
 
->    in non strict mthode function invocation is a global object ( window )
+>    in non strict mode function invocation is a global object ( window )
 
         if ur in strict mode :
 
@@ -150,9 +150,9 @@ methodes ---- >
             O.M( opt arg )
 
 
->    methode invocation are called with dot notation  property access 
+>    methode invocation are called with dot notation.
 
->    property acces invocation that use sqaure braket can also call methodes  : 
+>    property access invocation that use sqaure braket can also call methodes  : 
 
         let object = {};
 
@@ -162,9 +162,9 @@ methodes ---- >
 
     let another_object = object.methode(arg);
 
->    u can use an invocation return value , as   value for the next methode 
+>    u can use an invocation return value , as   value for the next invocation 
 
->    thats why this is possible in async statements : 
+>    thats why this is possible in async expressions : 
 
 
     doStep1().then(doStep2).catch(handle erorr)
@@ -210,7 +210,7 @@ what happens when you invoke ur function with more or fewer arguments than defin
 
 >             or u can just define a parameter with default values since it actually defined when the function is invoked 
 
-            function getPropertyName(arg , optionalArg = [] 'default value'){
+            function getPropertyName ( arg ,  'default value' , optionalArg ){
 
             }
 >
@@ -231,7 +231,7 @@ veriadic functions --- >
 
 higher oredr function INVOCATION ----  > 
 
->       hoc are function that take another function as parameter and operate on them and return a new one 
+>       hoc are functions that take another function as parameter and operate on them and return a new one 
 
 
             function higherOrder(wrappedFunction){
@@ -245,7 +245,7 @@ higher oredr function INVOCATION ----  >
 
 >        we invoke them like this : 
 
-                higgherOrder(wrappedFunction)(...args) // the leftSide evaluates to a funcyion and takes the second parenthesis as arguments 
+                higherOrder(wrappedFunction)(...args) // the leftSide evaluates to a function and takes the second parenthesis as arguments 
 
 
 functions are not syntaxt bullshit , they are values :
@@ -283,8 +283,100 @@ functions are not syntaxt bullshit , they are values :
 
     //invocation :
             caculate(add , 1 , 2) 
+
+
+closures ---- > 
+    scope === scope is visability / accessbility 
+
+>       variable defined inside a function are not accessable outside the function 
+
+>       to avoid cluttering the global nameSpace , we define varibles inside the function and they become local to it 
+
+>       this function is used only as a temperary nameSpace 
+
+>        the main idea is providing a scope to avoid mix ups between varibles with the same name 
+
+
+    let car = {
+        start : function(){
+            consol.log('start')
+        } 
+        stop : function(){
+            consol.log('stop')
+        }
+    }
     
 
+    let bike = {
+
+          start : function(){
+            consol.log('start')
+        } 
+        stop : function(){
+            consol.log('stop')
+        }
+
+    }
+
+>       if even one varible name is too much in global nameSpace : 
+
+
+        (function()=>{  //function expression definition
+
+             const car = { // use const to avoid leaking 
+        start : function(){
+            consol.log('start')
+        } 
+        stop : function(){
+            consol.log('stop')
+        }
+    }
+    
+
+            const bike = { 
+
+          start : function(){
+            consol.log('start')
+        } 
+        stop : function(){
+            consol.log('stop')
+        }
+
+    }
+
+        }()) //the  parenthesis pair after curly braces calls this function immedietly 
+
+>             no matter where u invoke the function (or nested function) ,
+                    
+              they execute the varible scope they were difined in this happens mostly with nested function 
+
+
+            let scope = 'global scope'
+              function checkScope(){
+                let scope = 'local scope'
+                retrun function f(
+                    return scope 
+                );
+              }
+
+              checkScope(); //returnes 'local scope'
+              checkScope()(); //returnes function f() but since f was defined in a scope 
+              //that let scope === 'local scope' it retuens 'local scope'
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
+>
 
 
 
