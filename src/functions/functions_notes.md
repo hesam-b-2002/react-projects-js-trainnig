@@ -362,11 +362,26 @@ closures ---- >
               checkScope(); //returnes 'local scope'
               checkScope()(); //returnes function f() but since f was defined in a scope 
               //that let scope === 'local scope' it retuens 'local scope'
->
->
->
->
->
+>            before i go to the next bullshit lets take an important note :
+
+>            in javaScript a variable is gone if nothing can reach it --->
+
+            let counter = (function(){
+                let count = 0 
+                return ++count // => returnes count = 1
+            }()) // no matter how many times i invoke this function the count is always gonna be 1
+                //  since count is local to counter function and is executed when invoked then resets 
+
+>           but this shit is fucking magic --->
+
+
+            let counter = (function(){
+                let count = 0
+                return function(){
+                    return count++
+                }
+            }()) // in this shit js keeps count alive since the nested function has access to it 
+                // and doesnt redifine it since it has no right to 
 >
 >
 >
