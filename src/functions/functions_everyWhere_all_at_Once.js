@@ -138,24 +138,19 @@ export const Functoins_what_do_they_know_do_they_know_things_lets_find_out =
     //so js keeps it alive
     //why doesn't it make a new counter ?
     //bc the nested function has no right too , it's defined in it's countaining function
-    //so the value counter++ which is the whole value of the immedietly invoked function expression lives
+    //so the value counter++ which is the whole value of the immedietly
 
     function counter() {
       let count = 0;
-
       return {
-        add: (function () {
-          return ++count;
-        })(),
-        reset: (function () {
-          count = 0;
-        })(),
+        add: function () {
+          console.log(count);
+          return count++;
+        },
+        sub: function () {
+          console.log(count);
+          return count--;
+        },
       };
-    }
-
-    let a = counter();
-    a.add; //=> 1
-    let b = counter();
-    b.add; //=> 1
-    //why they act independently ?
+    } // trick is to call the outer function once and nested ones multiple times
   };
