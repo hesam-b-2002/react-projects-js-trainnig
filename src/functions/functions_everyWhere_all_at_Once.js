@@ -139,18 +139,55 @@ export const Functoins_what_do_they_know_do_they_know_things_lets_find_out =
     //why doesn't it make a new counter ?
     //bc the nested function has no right too , it's defined in it's countaining function
     //so the value counter++ which is the whole value of the immedietly
+    // function counter() {
+    //   let count = 0;
+    //   return {
+    //     add: function () {
+    //       console.log(count);
+    //       return count++;
+    //     },
+    //     sub: function () {
+    //       console.log(count);
+    //       return count--;
+    //     },
+    //   };
+    // } // trick is to call the outer function once and then nested ones
 
-    function counter() {
-      let count = 0;
-      return {
-        add: function () {
-          console.log(count);
-          return count++;
-        },
-        sub: function () {
-          console.log(count);
-          return count--;
-        },
-      };
-    } // trick is to call the outer function once and nested ones multiple times
+    let anagrams = [
+      "below",
+      "elbow",
+      "study",
+      "dusty",
+      "night",
+      "thing",
+      "act",
+      "cat",
+      "dessert",
+      "stressed",
+      "gainly",
+      "laying",
+    ];
+    let nonAnagrams = ["below", "act", "dessert", "laying", "thing"];
+
+    // check if the words have the same length first
+
+    function check_for_anaGrams(arg1 = [], arg2 = []) {
+      let isAnagram = [];
+      if (arg1.length === arg2.length) {
+        for (let i = 0; i < arg1.length; i++) {
+          for (let j = 0; j < arg2.length; j++) {
+            if (arg1[i] === arg2[j]) {
+              console.log(`match is${i + 1} is ${arg1[i]}`);
+            }
+          }
+        }
+      } else {
+        console.log(`words dont have the same length`);
+        return false;
+      }
+    }
+
+    // let anagramCheck =
+    check_for_anaGrams("aab", "abb");
+    console.log(anagramCheck);
   };

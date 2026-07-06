@@ -14,6 +14,13 @@ function expresion --->
 
     const f = function( argument ){ return value }
 
+self invocationg function --- >
+
+
+>      is invoked immediatly after being defined 
+
+        const func = (function(){})()
+
 >     function expression are  , functoins declered inside a larger statement or expression
 
 >     function expression can be an argument to another function
@@ -122,7 +129,7 @@ function invocation in strictMode ---- >
 
 >    in strict mode it is undifined
 
->    in non strict mode function invocation is a global object ( window )
+>    in non strict mode  invocatoin context is assigned to the  global object ( window )
 
         if ur in strict mode :
 
@@ -167,7 +174,8 @@ methodes ---- >
 >    thats why this is possible in async expressions :
 
 
-    doStep1().then(doStep2).catch(handle erorr)
+    doStep1().then(doStep2).catch(handle erorr) //first function is invoked and evaluated to a value 
+    //then is passed to the next function
 
 >   this shit is called methode chaining
 
@@ -188,14 +196,14 @@ when u invoke a funtion implicitlly ---- >
 
 what happens when you invoke ur function with more or fewer arguments than defined parameters initially  ---- >
 
->        if  a function was invoked withe more arguments they are set to a defult value which is often undifined ;
+>        if  a function was invoked with more arguments they are set to a defult value which is often undifined ;
 
 >       optional arguments :
 >           u declere ur function with optional arguments :
 
                 function getPropertyName( arg , optionalArg ){
                     optionalArg = optionalArg || [] ; // this tests if the optinal argument is undefined or not
-                    //  undefined  , we assign  an empty arrey to it which we can use later
+                    //  if undefined  , we assign  an empty arrey to it which we can use later
                 }
 
 >                u can check the if the arg exists simply with
@@ -279,6 +287,7 @@ functions are not syntaxt bullshit , they are values :
     function caculate( operator , operand1 , operand2 ){ // u pass a function and it's parameters as arguments
 
         return operator( operand1 , operand2 ) ; // u cal the function and it's arguments
+        // which is pretty cool
     }
 
     //invocation :
@@ -376,7 +385,8 @@ closures ---- >
 >           bc count gets redefined ever time
 
 >           now this shit is fucking magic --->
->               nested function have access to their parent varibles even after the parent is fucking done
+>               nested function have access to their parent varibles , even after the parent is fucking done
+>               cool thing is since the var cant be redefined by the nested function 
 >               we can use this to give private access to a variable
 
             let counter = (function(){
@@ -387,12 +397,33 @@ closures ---- >
             }()) 
 
             let add = counter(); // now the return value of the outer funtion is assigned to add var
->
->
->
->
->
->
+
+Private property accessor methods using closures --->
+
+let object_retuner = function(){
+    let value;
+
+    retrun{
+        set: function(arg){
+            return arg = value;
+            
+        },
+        get: function(arg){
+            return value;
+        }
+    }// pretty simple , funtion returnes an objects with two methodes 
+}
+>           lets assign and invoke it :
+
+            let a = object_returner() , let b = object_retuner()
+            // now they both have access to the property 
+
+>           but since we assigned them to diffrent vars they both have seperate scopes(magic bullshit)
+
+>           it is as if we created two new objects with two diffrent methodes 
+>           we access them properties with plain old dot methode invocation
+
+a.set(v) , b.get() // remember we assign the returned obj once then call the methodes as many times as we fucking want
 >
 >
 >
