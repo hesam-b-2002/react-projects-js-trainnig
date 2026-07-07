@@ -159,15 +159,7 @@ methodes ---- >
 
 >    methode invocation are called with dot notation.
 
->    property access invocation that use sqaure braket can also call methodes  :
-
-        let object = {};
-
-    object["methode"] = function (arg) {
-      return (this.arg = arg);
-    };
-
-    let another_object = object.methode(arg);
+>    property access invocation that use  braket notation can also call methodes  :
 
 >    u can use an invocation return value , as   value for the next invocation
 
@@ -426,7 +418,31 @@ let object_retuner = function(){
 a.set(v) , b.get() // remember we assign the returned obj once then call the methodes as many times as we fucking want
 >
 >
->
+>           we can mix the shit above to dynamically set , get , or what ever the fuck we want with an object 
+>           and give it private access to value defined in the function and couple of methodes to change or observe it
+
+            function gives_private_property(the_object ,  the_Name){
+                let private_Value ;
+
+                //we can use bracket notation to dynamically change the change the methodes names based on diffrent context
+                // this allows our code to be reusable
+                the_object[`get${the_Name}`]  = function(){
+                    return value 
+                        //observ value
+                }
+                the_object[`get${the_Name}`] = function(v){
+                    value = v // change the value whatever the funk it is 
+                }
+            }
+
+            //now invoke the function once to initiate 
+
+            let o ={};
+
+            gives_private_Property(o , 'Color') // is is the object and color is the varible we want to change or set
+
+            o.setColor('blue') // sets the color to blue 
+            o.getColor() // sees the change
 
 
 

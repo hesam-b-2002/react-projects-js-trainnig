@@ -152,42 +152,4 @@ export const Functoins_what_do_they_know_do_they_know_things_lets_find_out =
     //     },
     //   };
     // } // trick is to call the outer function once and then nested ones
-
-    let anagrams = [
-      "below",
-      "elbow",
-      "study",
-      "dusty",
-      "night",
-      "thing",
-      "act",
-      "cat",
-      "dessert",
-      "stressed",
-      "gainly",
-      "laying",
-    ];
-    let nonAnagrams = ["below", "act", "dessert", "laying", "thing"];
-
-    // check if the words have the same length first
-
-    function check_for_anaGrams(arg1 = [], arg2 = []) {
-      let isAnagram = [];
-      if (arg1.length === arg2.length) {
-        for (let i = 0; i < arg1.length; i++) {
-          for (let j = 0; j < arg2.length; j++) {
-            if (arg1[i] === arg2[j]) {
-              console.log(`match is${i + 1} is ${arg1[i]}`);
-            }
-          }
-        }
-      } else {
-        console.log(`words dont have the same length`);
-        return false;
-      }
-    }
-
-    // let anagramCheck =
-    check_for_anaGrams("aab", "abb");
-    console.log(anagramCheck);
-  };
+  }
