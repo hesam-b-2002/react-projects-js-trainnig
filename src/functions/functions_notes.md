@@ -443,7 +443,10 @@ a.set(v) , b.get() // remember we assign the returned obj once then call the met
 
             o.setColor('blue') // sets the color to blue 
             o.getColor() // sees the change
+>          **two clusers defined in the same scope and share access to the same varible  , thats it the whole shit , thats fucking it**
 
+
+predict function as argument , usefull to typecheck--- >
 
 
 
