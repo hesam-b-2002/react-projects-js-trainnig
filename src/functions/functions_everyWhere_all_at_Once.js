@@ -151,4 +151,80 @@ export const Functoins_what_do_they_know_do_they_know_things_lets_find_out = () 
   //     },
   //   };
   // } // trick is to call the outer function once and then nested ones
-};
+  // function addPrivateAccess(object, name, predictFunction) {
+  //   let value;
+  //   object[`get${name}`] = function () {
+  //     console.log(value);
+  //     return value;
+  //   };
+  //   object[`set${name}`] = function (v) {
+  //     if (predictFunction && !predictFunction(v)) {
+  //       //predict function is an optional argument
+  //       // u can pass it as a function that has the return value of true / false
+  //       // if is passed in the invocation and is not true then throw an error
+  //       throw new TypeError(`${v} does not match the type of `);
+  //     } else {
+  //       value = v;
+  //     }
+  //   };
+  // }
+  // let obj = {};
+  // addPrivateAccess(obj, "Color", (x) => typeof x === "string"); // herre predict funtion is a arrow function expression and returnes bollean
+  //// we used this predict shit alot in array methodes
+  // obj.setColor("blue");
+  // obj.getColor();
+  //call() // apply()
+  // " whats the diffrence between the two ?";
+  // let caculate = {
+  //   add: function (operand1, operand2) {
+  //     return operand1 + operand2;
+  //   },
+  // };
+  // `wrapper factory`;
+  // function trace(object, methode) {
+  //   let orginal_methode = object[methode];
+  //   return function (...args) {
+  //     try {
+  //       orginal_methode(args);
+  //       console.log(`methode initiated`);
+  //     } finally {
+  //       console.log(`methode is done `);
+  //     }
+  //   };
+  // }
+  // trace(caculate, `add`)(1, 2);
+  // `takes a function wrapps it in another function the orginal function / methode is unchainged is called with wrapper function
+  // (wrapped function)(wrapped function args)``monkey patching / methode decorator `;
+  // function traceMethode(object, methode) {
+  //   let original_methode = object[methode];
+  //   object[methode] = function (...args) {
+  //     console.log(`methode initiated`);
+  //     let res = original_methode.apply(this, args);
+  //     console.log(`methode is done`);
+  //     return res;
+  //   };
+  // }
+  // traceMethode(caculate, `add`);
+  // caculate.add(1, 2);
+  // `take the orginal methode and object containing it  remmeber  it , then modify / nuke it with assigning a new function to it that logs initiation and finalization`;
+
+  let sum = (x, y) => {
+    return x + y;
+  };
+  let multy = (x, y) => {
+    return x * y;
+  };
+  let divide = (x, y) => {
+    return x / y;
+  };
+
+  function reduce(arrey, ...callBack) {
+    return arrey.reduce(...callBack);
+  }
+
+  let arr = [1, 2, 3, 4, 5, 6, 6, 7];
+
+  let res = reduce(arr, (sum, multy, divide));
+
+  console.log(res);
+};;;;;;
