@@ -195,7 +195,7 @@ console.log(arg)
                 .splice() methode removes , inserts  and all the shits
                         if used for removing splice insets deleted little shits into a new arrey MUTATING ORG SHIt
                         the first arrey
-                firt arg is the start index and second arg is delete count
+                fisrt arg is the start index and second arg is delete count
                 words.splice( 0 , 20 )
                         console.log(words) // is mutated and contains last 6 little shits
                 let splicedWords = words.splice(0,20)

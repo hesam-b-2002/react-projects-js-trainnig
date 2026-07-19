@@ -10,6 +10,17 @@ functoins declerations --->
 
 >     functions with no return value , have a  value of undefined
 
+
+function bluhBluh(){
+    return some_shit;
+}
+
+>     if we declere a function like this we can assign it to any varible
+
+let someVarible = bulhBluh() 
+//=> invokation :   
+>                   someVarible()
+
 function expresion --->
 
     const f = function( argument ){ return value }
@@ -23,23 +34,23 @@ self invocationg function --- >
 
 >     function expression are  , functoins declered inside a larger statement or expression
 
->     function expression can be an argument to another function
+>     functions can be an argument to another function
 
 >     name is optional for a function expression
 
-        let sorted_arr = arr.sort(function( a , b ) => retuen a - b );
+        let sorted_arr = arr.sort(function( a , b ) => retuen a - b ); // yeah there is a function there stupid but we dont name it since we dont invoke it outside or even use the keyword function
 
 >     u can use this ability to define a typeCheck function which is pretty cool
 
 function bluh( value , typeCheckFunction ){
-    if(!typeCheckFunction(value)){ // if the function is evaluated to false in execution
+    if(!typeCheckFunction(value)){ // im just giving this function a parametr with any name and in invocation do some suprise butt play and make it a function
         throw Error
     }else{
         return value
     }
 
 }
-bluh(value , (type) => type === myType )
+bluh( value , (type) => type === myType ) // here is the suprise buttPLay
 
 diffrence between the two --->
 
@@ -83,9 +94,9 @@ nested functions --- >
                 }
 
 
->       nested functions in an objects methode , dont inherit the (this) that refers to the object
+>       nested functions  , dont inherit the (this) keyword
 
->       properties , fortunally there are tricks :
+>       fortunally there are tricks :
 
       let object = {
         value : value ,
@@ -119,7 +130,7 @@ nested functions --- >
 
 function invocation ---- >
 
->           function's bodies  are executed whne they are invoked
+>           function's bodies  are executed when they are invoked
 
 >           functions are called in this ways :
 
@@ -129,7 +140,7 @@ function invocation ---- >
 
 >           constructors
 
->           indirectly with apply() , call() methode
+>           indirectly with apply() , call() , bind() methods
 
 >           implicitly
 
@@ -173,7 +184,7 @@ recursive function ---- >
     }
 
 
-methodes ---- >
+methods ---- >
 
 >    if u have object O and a methode M
 
@@ -188,6 +199,8 @@ methodes ---- >
 >    methode invocation are called with dot notation , or bracket notation
 
 >    property access invocation that use  braket notation can also call methodes  :
+
+        let name = Color , O[`get${name}`] = function(){}   // > O.getColor()
 
 >    u can use an invocation return value , as   value for the next invocation
 
@@ -238,7 +251,7 @@ what happens when you invoke ur function with more or fewer arguments than defin
 
 >             or u can just define a parameter with default values since it is actually defined when the function is invoked
 
-            function getPropertyName ( arg ,  'default value' , optionalArg ){
+            function getPropertyName ( arg ,  defaultValue = 'default value' , optionalArg ){
 
             }
 >
@@ -254,6 +267,8 @@ veriadic functions --- >
 >       when this function is invoked  arguments that u pass first are assigned to non rest parameters;
 
 >       and the rest arguments are stored to an arrey , a rest arg can be an empty arrey but not undifined;
+
+>       this function can take any number of arguments
 
 
 
@@ -273,7 +288,7 @@ higher oredr function INVOCATION ----  >
 
 >        we invoke them like this :
 
-                higherOrder(wrappedFunction)(...args) // the leftSide evaluates to a function and takes the second parenthesis as arguments
+                higherOrder(wrappedFunction)(...args) // the leftSide evaluates to returned function and takes the second parenthesis as arguments
 
 
 functions are not syntaxt bullshit , they are values :
@@ -292,7 +307,7 @@ functions are not syntaxt bullshit , they are values :
 
         somthing cool --->
 
-> since functions are values u can pull this shit off( i dont know whats it called ( probably HOC ?)) --->
+>       since functions are values u can pull this shit off( i dont know whats it called ( probably HOC ?)) --->
 
 
             function add( num1 ,num2 ) { return (num1 + num2)}
@@ -405,11 +420,12 @@ closures ---- >
                 return ++count // => returnes count = 1
             }())
 >           no matter how many time i invoke this , the count is always gonna be 1 ,
->           bc count gets redefined every time
+>           bc count dies when function runs once and if u call it again its gonna 
+>           define this var and kill it agian when its finished ...
 
 >           now this shit is fucking magic --->
 >               nested function have access to their parent varibles , even after the parent is fucking done
->               cool thing is since the varible in the nested func wont be redefined by the nested function
+>               cool thing is since the varible in the wrapper function cant be redefined by the nested function
 >               we can use this to give private access to a variable
 
             let counter = (function(){
@@ -434,24 +450,17 @@ let object_retuner = function(){
         get: function(arg){
             return value;
         }
-    }// pretty simple , funtion returnes an objects with two methodes gives them both access to the varible
+    }// pretty simple , function returnes an objects with two methodes gives them both access to the varible
 }
 >           lets assign and invoke it :
 
             let a = object_returner() , let b = object_retuner()
-            // now they both have access to the property
-            a.set() / a.get()  and b.set() / b.get() // refere and operate to diffrent varibles
-            // as if they initiate their own values to do stuff on
+            // now they both create a scope and  access the private property 
+            a.set() / a.get()  and b.set() / b.get() // although a and b invoke the same function 
+            //since they are defined with let keyword and each have their own block scope
 
->           but since we assigned them to diffrent vars they both have seperate scopes(magic bullshit)
 
->           it is as if we created two new objects with  diffrent methodes
->           we access them properties with plain old dot methode invocation
 
-a.set(v) , b.get() // remember we assign the returned obj once , then call the methodes as many times as we fucking want
->                 // so property gets defined and accessed then do wierd shit do it
->
->
 >           we can mix the shit above to dynamically set , get , or what ever the fuck we want with an object
 >           and give it private access to value defined in the function and couple of methodes to change or observe it
 
@@ -580,11 +589,37 @@ Processing Arrays with Functions --->
                 return arrey.reduce(...shit_Ton_Of_CallBcaks)
             }
 
+// so somehow , this is completly legal in js => 
+
+      let arr = [1, 1, 9, 10, 10, 1];
+  function reduce(arrey, callBack) {
+    return arrey.reduce(callBack);
+  }
+  function map(arrey, callBack) {
+    return arrey.map(callBack);
+  }
+
+  let standard_diviation = Math.sqrt(
+    reduce(
+      map(
+        map(arr, (x) => x - reduce(arr, (x, y) => x + y) / arr.length),
+        (x) => x * x,
+      ),
+      (x, y) => x + y,
+    ) / arr.length,
+  );
+
+  //im not gonna write any discription , the main idea is passing a function invocation to another 
+
+  //then there are gonna resolve themselves and suck each orhers dicks 
+
+  //goodluck future me
+
 
                 
-
-
 Higher-Order Functions --- >
+>           higher order functions are functions that operate on funtions and return a new one
+// i've worked on them before , the idea is u can use apply() , call() methodes writing them 
 
 
 Partial Application of Functions --->
