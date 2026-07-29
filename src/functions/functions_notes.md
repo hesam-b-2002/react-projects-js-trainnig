@@ -181,7 +181,11 @@ recursive function ---- >
     let function bluh(){
         return someShit
             bluh();
-    } // treat this like loop so put in the condition to start the invocation in the function itself and a condition to get out of it
+    } // its important to state a condition to invoke the function in itself and get out of
+
+>      the condition to invoke the function in itself is called recursive case
+>      the condition to get out of infinite invocation  is base case
+>      recursive function bodies should move toward stopping it 
 
 
 methods ---- >
