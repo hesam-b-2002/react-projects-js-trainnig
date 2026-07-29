@@ -28,7 +28,7 @@
 	
 	- [ ] Provider Pattern
 	
-	- [ ] Container / Representational Pattern (historical, still useful)
+	- [ ] Container / Representational Pattern 
 	
 	- [ ] Module Pattern
 	
@@ -36,11 +36,11 @@
 	
 	- [ ] Compound Pattern
 	
-	- [ ] Render Props Pattern (know what it is)
+	- [ ] Render Props Pattern 
 	
-	- [ ] HOC Pattern (legacy but common in older code-bases)
+	- [ ] HOC Pattern 
 	
-	- [ ] Factory Pattern (optional but useful)
+	- [ ] Factory Pattern 
 
 
 - [ ] Next.js Fundamentals
