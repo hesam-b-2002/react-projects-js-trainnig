@@ -20,11 +20,6 @@ function bluhBluh(){
 let someVarible = bulhBluh() 
 //=> invokation :   
 >                   someVarible()
-
-function expresion --->
-
-    const f = function( argument ){ return value }
-
 self invocationg function --- >
 
 
@@ -32,33 +27,40 @@ self invocationg function --- >
 
         const func = (function(){})()
 
+function expresion --->
+
+    const f = function( argument ){ return value }
+
+
+
 >     function expression are  , functoins declered inside a larger statement or expression
 
 >     functions can be an argument to another function
 
 >     name is optional for a function expression
 
-        let sorted_arr = arr.sort(function( a , b ) => retuen a - b ); // yeah there is a function there stupid but we dont name it since we dont invoke it outside or even use the keyword function
+        let sorted_arr = arr.sort(function( a , b ) => retuen a - b ); // yeah there is a function there stupid but we dont name it since we dont invoke it outside the expression or even use the keyword function
 
 >     u can use this ability to define a typeCheck function which is pretty cool
 
 function bluh( value , typeCheckFunction ){
-    if(!typeCheckFunction(value)){ // im just giving this function a parametr with any name and in invocation do some suprise butt play and make it a function
+    if(!typeCheckFunction(value)){ // im just giving this function a parametr with any name and in invocation do some suprise butt_play and make it a function
         throw Error
     }else{
         return value
     }
 
 }
-bluh( value , (type) => type === myType ) // here is the suprise buttPLay
+bluh( value , (type) => type === myType ) // here is the suprise butt_PLay
 
 diffrence between the two --->
 
->          function declerations , declere a varible and assign the function to it ,
+>          function keyword , decleres a varible thet comes prior to it and assign the function to it ,
 
 >          function expression is up to me to assign to a const , var or another function
 
 >          function declerations are hoisted and can be invoked before they're declered , expressoins can't
+//hoist is a disgusting word
 
 arrow functions --- >
 
@@ -66,25 +68,25 @@ arrow functions --- >
 
 >         if their body is a single return statement , and a single arg  u can omit everything
 
-                let arrowFunctoins =  arg  => retrun arg
+                let arrowFunctoins =  arg  =>  arg
+                // they also omit the return keyword 
 
 >         which means u can do shit like this
 
                 let filterdArr = arr.filter( x => x  === true )
 
-nested functions --- >
+nested functions --->
 
 >             nested functoins can access varibles assigned whithin function declerd in
 
-
                 function bluh(){
-                    let a , b
+                    let a , b;
 
                         function bluhBluh(){
-                            return a
+                            return a;
 
                                 function bluhBluhBluh(){
-                                    return b
+                                    return b;
                                 }
 
                                 bluhBluhBluh();
@@ -111,7 +113,7 @@ nested functions --- >
 
                                 // but nested functions have access to their functions value (defined in their scope) so :
 
-                        methode_value === object    // true , our trick workes
+                        methode_value === object    //true , our trick workes
                         }
 
                 }
@@ -132,7 +134,7 @@ function invocation ---- >
 
 >           function's bodies  are executed when they are invoked
 
->           functions are called in this ways :
+>           functions are called in this ways:
 
 >           function()
 
@@ -172,16 +174,14 @@ function invocation in strictMode ---- >
 
         if ur in strict mode :
 
-            let strict = (function () { return !this }) // returnes true
+            let strict = (function () { return !this })   //returnes true
 
 recursive function ---- >
 
-
     let function bluh(){
         return someShit
-
             bluh();
-    }
+    } // treat this like loop so put in the condition to start the invocation in the function itself and a condition to get out of it
 
 
 methods ---- >
@@ -261,6 +261,7 @@ veriadic functions --- >
 >         functions that u define that can be invoked with any number of arguments
 
          function veradic(firstArgument , ...rest){
+            // this is rest operator not a spread
 
         }
 
@@ -331,6 +332,7 @@ functions are not syntaxt bullshit , they are values :
 
 closures ---- >
     scope === visability / accessbility
+    closure === A function together with the variables from the scope in which it was created inside of 
 
 >       variable defined inside a function are not accessable outside the function
 
@@ -392,7 +394,7 @@ closures ---- >
 
 >             no matter where u invoke the function (or nested function) ,
 
-              they execute the varible scope they were difined in ,this is important mostly with nested function
+              they execute the varible in the scope they were difined in ,this is important mostly with nested function
 
 
             let scope = 'global scope'
@@ -436,6 +438,10 @@ closures ---- >
             }())
 
             let add = counter(); // now the return value of the outer funtion is assigned to add var
+            add() //=> 0 
+            add() //=> 1
+            add() //=> 2
+            add() //=> 3
 
 Private property accessor methods using closures --->
 
@@ -470,11 +476,11 @@ let object_retuner = function(){
                 //we can use bracket notation to dynamically   change the methodes names based on diffrent context
                 // this allows our code to be reusable
                 the_object[`get${the_Name}`]  = function(){
-                    return value
+                    return private_Value
                         //observ value
                 }
                 the_object[`set${the_Name}`] = function(v){
-                    value = v // change the value whatever the fuck it is
+                    private_Value = v // change the value whatever the fuck it is
                 }
             }
 
@@ -523,7 +529,7 @@ call() / apply() / bind() methodes --->
 
 call() --->
 
->       the first argumnet to this methode is the object we want to invoke a function on
+>       the first argumnet is to this methode is the object we want to invoke a function on
 
         let object = {} , function(){}
 
@@ -559,6 +565,13 @@ functional programing ideas --->
 
 Processing Arrays with Functions --->
 
+
+>           internal iteration :    
+>                     arr.map(...)
+
+>           external iteration : 
+>                     for( i in arr )
+
 >           before moving on let me show u somthing cool
 
 >           arrey methods work like this arrey.methode(callBackFunction(value,index,arrey_itself))
@@ -572,10 +585,6 @@ Processing Arrays with Functions --->
 
 >            so insted of using arrey.methode() , we can write the functional version of it : 
 
-
-            let sum = (x , y) = > {
-                return x + y
-                }
 
             function reduce( arrey , callBack_Function ){
                 return arrey.reduce( callBack_Function ) // here reduce is standard arrey methode  
@@ -614,6 +623,107 @@ Processing Arrays with Functions --->
   //then there are gonna resolve themselves and suck each orhers dicks 
 
   //goodluck future me
+
+
+  
+    function runesOnce() {
+      let count = 0;
+      return count++;
+    }
+
+    function can_be_called_n_times(f, n) {
+      let call_count = 0;
+      return function () {
+        call_count++;
+        if (call_count <= n) {
+          return f();
+        } else {
+          return null;
+        }
+      };
+    }
+    function can_be_called_after_n_times(f, n) {
+      let call_count = 0;
+      return function () {
+        ++call_count;
+        if (call_count > n) {
+          return f();
+        } else {
+          return null;
+        }
+      };
+    }
+
+    function negate(f) {
+      return function (...args) {
+        let res = f.call(this, ...args);
+        return !res;
+      };
+    }
+    function compose(f, g) {
+      return function (arg) {
+        return f.call(this, g.call(this, arg));
+      };
+    }
+    function pipe(f1, f2, f3) {
+      return function (arg) {
+        let res1 = f1.call(this, arg);
+        let res2 = f2.call(this, res1);
+
+        return f3.call(this, res2);
+      };
+    }
+
+    function findFirst(arrey, predict) {
+      let i = 0;
+      while (i < arrey.length) {
+        let res = predict(arrey[i]);
+        if (res === true) {
+          return arrey[i];
+        }
+        i++;
+      }
+    }
+
+    function groupBy(arrey, callBack) {
+      let i = 0,
+        obj = {};
+      while (i < arrey.length) {
+        let pred = callBack(arrey[i]);
+        obj[pred] = arrey[i];
+        i++;
+      }
+      return obj;
+    }
+
+    function myEvery(arrey, pred) {
+      let i = 0,
+        predict_verdict = true;
+      while (i < arrey.length) {
+        console.log(arrey[i]);
+        if (pred(arrey[i]) === false) {
+          predict_verdict = false;
+          break;
+        }
+        i++;
+      }
+      return predict_verdict;
+    }
+
+    function mySome(arrey, pred) {
+      let i = 0,
+        predict_verdict = false;
+      while (i < arrey.length) {
+        console.log(arrey[i]);
+        let res = pred(arrey[i]);
+        if (res === true) {
+          predict_verdict = true;
+          break;
+        }
+        i++;
+      }
+      return predict_verdict;
+    }
 
 
                 
