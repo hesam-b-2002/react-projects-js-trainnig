@@ -1,7 +1,8 @@
-- [] java-script definitive  guide 
+- [ ] java-script definitive  guide 
 	- [ ] function chapter 
 	- [ ] classes chapter 
 	- [ ] object chapter 
+	- [ ] object originated programming
 	- [ ] standard library 
 	- [ ] iterators and generators 
 	- [ ] asynchronous data
@@ -12,9 +13,6 @@
 - [ ] coursera  meta  front end development 
 	- [ ] Principles of UX/UI Design
 	- [ ] Front-End Developer Capstone
-		- [ ] table-booking system 
-			- [ ] unit-testing
-		- [ ] interacting with API
 	- [ ] Coding Interview Preparation
 
 - [ ] Road to react 
