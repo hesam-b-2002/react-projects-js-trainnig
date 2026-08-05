@@ -17,6 +17,26 @@
 
 - [ ] Road to react 
 	 - [ ] Fundamentals of React
+		 - [x] React Props
+		 - [x] React State
+		 - [ ] Callback Handlers in JSX
+		 - [ ] Lifting State in React
+		 - [ ] React Controlled Components
+		 - [ ] Props Handling (Advanced)
+		 - [ ] React Side-Effects
+		 - [ ] React Custom Hooks (Advanced)
+		 - [ ] React Fragments
+		 - [ ] Reusable React Component
+		 - [ ] Imperative React
+		 - [ ] React Asynchronous Data	
+		 - [ ] React Conditional Rendering
+		 - [ ] React Advanced State(use_reducer( ))
+		 - [ ] Data Fetching with React
+		 - [ ] Data Re-Fetching in React
+		 - [ ] Memorized Handler in React (Advanced)
+		 - [ ] Explicit Data Fetching with React 
+		 - [ ] Third-Party Libraries in React 
+		 - [ ] Async/Await in React (Advanced)
 	- [ ] React’s Legacy
 	- [ ] Styling in React
 	 - [ ] React Maintenance 
@@ -28,7 +48,7 @@
 	
 	- [ ] Provider Pattern
 	
-	- [ ] Container / Representational Pattern 
+	- [ ] Container / Representational Pattern (historical, still useful)
 	
 	- [ ] Module Pattern
 	
@@ -36,11 +56,11 @@
 	
 	- [ ] Compound Pattern
 	
-	- [ ] Render Props Pattern 
+	- [ ] Render Props Pattern (know what it is)
 	
-	- [ ] HOC Pattern 
+	- [ ] HOC Pattern (legacy but common in older code-bases)
 	
-	- [ ] Factory Pattern 
+	- [ ] Factory Pattern (optional but useful)
 
 
 - [ ] Next.js Fundamentals

@@ -637,7 +637,27 @@ Higher-Order Functions --- >
 // i've worked on them before , the idea is u can use apply() , call() methodes writing them 
 
 
-Partial Application of Functions --->
+Partial Application  (half_chub application)--->
+>           partial application is 'argument fuckery'
+>           the main idea of partial application is u have a value that u use the shit out of in ur app 
+>           and u have a a varible that is dynamic and can be changed or in unknown  
+>           so u call ur hof function with the value u alredy have then complete the invication with the dynamic varible
+//the pattern :
+
+        function halfChub ( f,consistant value ){
+            return function(...interchangeable varible){
+                let finalArgs = [...consistant value , ...interchangeable varible]
+                //or [...interchangeable varible , ...consistant value]
+                //depends in what ORDER ur closure  function accepts
+               return  f.call(this,finalArgs)
+            }
+        }
+
+//invocation : 
+        let invoke = halfChub((x)=>x , always here value)
+        invoke( interchangeable value)
+
+
 
 
 
