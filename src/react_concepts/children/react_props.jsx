@@ -1,9 +1,9 @@
 
 
-export const B = () => {
+export const B = ({ pokemon }) => {
     return (
         <>
-            <h1>b</h1>
+            <h3>{pokemon}</h3>
         </>
     )
 }
