@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 
-export const Data = ({ onData }) => {
-  useEffect(() => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/`)
-      .then((results) => results.json())
-      .then((data) => onData(data.results));
-  });
+export const Data = ({ handleData }) => {
+  fetch("https://pokeapi.co/api/v2/pokemon")
+    .then((res) => res.json())
+    .then((value) => handleData(value));
 };

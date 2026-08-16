@@ -662,6 +662,34 @@ Partial Application  (half_chub application)--->
 
 
 Memoization --->
+>       time and memmory are important in js bluh bluh bluh ...
+>       to save time and avoid redundant computation 
+>       the function must be pure :
+// >           'It minds its own business. It does not change any objects or variables that existed before it was called.'
+
+// >           Same inputs, same output. Given the same inputs, a pure  function should always return the same result.
+
+
+        function memomize(fn){
+            let cache = new Map() || {}
+             //create an obj to hold result
+             //closure function has private access to this cache
+            return (...args){
+                //check if the asked output for the in put exists
+                if(args.toString() in cache){
+                    return cache[`args`]
+                    // return the memoized result 
+                }
+                //if not : 
+                let result = fn.apply(this,...args)
+                // let fn do its thing 
+                cache[`args`].set(result ) || cache[`args`] = result
+                //then cach the result fo later use
+                return result;
+
+            }
+        }
+// this is very usefull with recursive functions or any functions where u need to memoize prev return value
 
 
 

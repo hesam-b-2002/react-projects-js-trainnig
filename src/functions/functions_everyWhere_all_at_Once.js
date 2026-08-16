@@ -1,178 +1,141 @@
 export const Functoins_what_do_they_know_do_they_know_things_lets_find_out =
   () => {
-    function myFilter(arrey, callBack) {
+    function myFilter(arr, predict) {
       let i = 0,
-        j = 0,
-        resultArr = [];
-
-      while (i < arrey.length) {
-        let callRes = callBack(arrey[i], i, arrey);
-        if (callRes === true) {
-          resultArr[j++] = arrey[i];
+        resultultArrey = [],
+        j = 0;
+      while (i < arr.length) {
+        let verdict = predict(arr[i]);
+        if (verdict === true) {
+          resultultArrey[j++] = arr[i];
         }
         i++;
       }
-      return resultArr;
+      return resultultArrey;
     }
-    function myMap(arrey, callBack) {
+    function myMap(arr, callBack) {
       let i = 0,
-        resArr = [];
-      while (i < arrey.length) {
-        resArr[i] = callBack(arrey[i], i, arrey);
+        resultultArrey = [];
+      while (i < arr.length) {
+        resultultArrey[i] = callBack(arr[i]);
         i++;
       }
-      return resArr;
+      return resultultArrey;
     }
-    function myReduce(arrey, callBack, initialAcc) {
-      let res,
-        i = 0;
-      while (i < arrey.length) {
-        if (initialAcc === undefined) {
-          res = callBack(arrey[i], arrey[i], i, arrey);
-        } else if (initialAcc) {
-          res = callBack(arrey[i], arrey[i], i, arrey);
-          res = callBack(initialAcc, res);
-        }
+    // *my reducer
 
-        i++;
-      }
-      return res;
-    }
-    function can_be_called_n_times(f, n) {
-      let callCount = 0;
+    function can_be_called_n_times(n, f) {
+      let callCounter = 0;
       return function (...args) {
-        if (callCount < n) {
-          return f.call(this, ...args);
+        callCounter++;
+        if (callCounter > n) {
+          return;
         } else {
-          console.log("cant be invoked more");
+          return f.call(this, ...args);
         }
-        ++callCount;
       };
     }
-    function can_be_called_after_n_times(f, n) {
-      let callCount = 0;
+    function can_be_called_after_n_times(n, f) {
+      let callCounter = 0;
       return function (...args) {
-        if (callCount < n) {
-          console.log(`this function should be called ${n} times`);
+        ++callCounter;
+        if (callCounter <= n) {
         } else {
-          return f.call(this, ...args);
+          return;
+          f.call(this, args);
         }
-        callCount++;
+      };
+    }
+    function negate(f) {
+      return function (...args) {
+        let result = f.call(this, ...args);
+        return !result;
+      };
+    }
+    function compose(f, g) {
+      return function (...args) {
+        return f.call(this, g.call(this, ...args));
       };
     }
     function findFirst(arr, predict) {
       let i = 0,
-        res;
-      while (i < arr.length) {
-        let predict_verdict = predict(arr[i]);
-        if (predict_verdict === true) {
-          res = arr[i];
-          break;
-        } else if (predict_verdict !== false) {
-          return null;
-        }
-        i++;
-      }
-      return res;
-    }
-    function myEvery(arr, predict) {
-      let i = 0,
-        predictVerdict = true;
-      while (i < arr.length) {
-        if (predict(arr[i]) === false) {
-          predictVerdict = false;
-          break;
-        }
-        i++;
-      }
-      return predictVerdict;
-    }
-
-    function mySome(arr, predict) {
-      let i = 0,
-        predictVerdict = false;
+        result = false;
       while (i < arr.length) {
         if (predict(arr[i]) === true) {
-          predictVerdict = true;
-          break;
+          result = true;
+          return;
         }
         i++;
       }
-      return predictVerdict;
+
+      return result;
     }
-    function counter() {
-      let count = 0;
-      return function () {
-        return count++;
-      };
-    }
-    function bankAcount() {
-      let balance = 0;
-      return {
-        depo: function (cash) {
-          balance += cash;
-          return balance;
-        },
-        withdraw: function (cash) {
-          balance -= cash;
-          return balance;
-        },
-        seeBalance: function () {
-          return balance;
-        },
-      };
-    }
-    function logger(f) {
+    function makeMultiplier(fn) {
       return function (...args) {
-        try {
-          f.call(this, ...args);
-          console.log(`called function ${f.name} with ${args}`);
-        } finally {
-          console.log(`call ended `);
-        }
+        return fn.call(this, ...args);
       };
     }
-    function traceMethode(o, m) {
-      let org = o[m];
-      o[m] = function (...args) {
-        console.log(`called methode : `, org.name);
-        let res = org.call(this, ...args);
-        console.log(res, `is returned `);
+    function myMap(arr, callBack) {
+      let resultArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        resultArr[i] = callBack(arr[i], i, arr);
+      }
+      return resultArr;
+    }
+    function wrapper(fn) {
+      return function (...args) {
+        console.log("");
+        let res = fn.call(this, ...args);
+        console.log(res);
         return res;
       };
     }
-    function callCounter(f) {
-      let callCount = 0;
-      return function (...args) {
-        ++callCount;
-        console.log(callCount);
-        return f.call(this, ...args);
-      };
-    }
-    function partial(f, ...outerArgs) {
-      // the outer args are the one that presisit over multiple invocations
+    function partialLeft(fn, ...outerArgs) {
       return function (...innerArgs) {
-        // the inner args is the interchangeable varible
-        const finalArgs = [...outerArgs, ...innerArgs];
-        return originalFunction.apply(this, finalArgs);
+        let args = [outerArgs, innerArgs];
+        return fn.apply(this, args);
       };
     }
-    //Practice: Create specialized price calculators
-    function discount(price, percentage) {
-      return price - price * (percentage / 100);
-    }
-    function tax(price, percentage) {
-      return price + price * (percentage / 100);
-    }
-    function calculateFinalPrice(tax_discount, ...tax_dicount) {
-      return function (...price) {
-        let args = [...price, ...tax_dicount];
-        return tax_discount.apply(this, args);
+    function memoize(fn) {
+      let cache = new Map();
+      return function (...args) {
+        if (cache.has(args.toString())) {
+          return cache.get(args.toString());
+        }
+        let key = args.toString();
+        let result = fn.call(this, ...args);
+        cache.set(key, result);
+        return result;
       };
     }
-
-    console.log();
+    function add(arg0) {
+      return function (arg1) {
+        let res = arg0 + arg1;
+        return function (arg2) {
+          return res + arg2;
+        };
+      };
+    }
+    const calculator = {
+      add(x, y) {
+        return x + y;
+      },
+    };
+    function tracemethode(o, m) {
+      let orginal_methode = o[m];
+      o[m] = function (...args) {
+        let res = orginal_methode.call(this, ...args);
+        console.log(args, "added");
+        return res;
+      };
+    }
+    function compose(f, g, h) {
+      return function (...args) {
+        return f.call(this, g.call(this, h.call(this, ...args)));
+      };
+    }
   };
+
 //write this fuckers to practice function ideas so far
 ("myFilter");
 ("myMap");

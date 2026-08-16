@@ -1,12 +1,3 @@
-export const Custom_Input = ({ name, value, onChangeInput }) => {
-
-    return (
-        <>
-            <input
-                value={value}
-                onChange={onChangeInput}
-                />
-      
-        </>
-    )
+import { useEffect, useRef } from "react"
+export const Custom_Input = ({ data, handleData }) => {
 }

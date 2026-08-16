@@ -1,5 +1,8 @@
 - [ ] java-script definitive  guide 
-	- [ ] function chapter 
+	- [x] function chapter 
+		- [x] H_O_F
+		- [x] partial Application
+		- [x] Memoziation
 	- [ ] classes chapter 
 	- [ ] object chapter 
 	- [ ] object originated programming
@@ -19,8 +22,8 @@
 	 - [ ] Fundamentals of React
 		 - [x] React Props
 		 - [x] React State
-		 - [ ] Callback Handlers in JSX
-		 - [ ] Lifting State in React
+		 - [x] Callback Handlers in JSX
+		 - [x] Lifting State in React
 		 - [ ] React Controlled Components
 		 - [ ] Props Handling (Advanced)
 		 - [ ] React Side-Effects
@@ -48,7 +51,7 @@
 	
 	- [ ] Provider Pattern
 	
-	- [ ] Container / Representational Pattern (historical, still useful)
+	- [ ] Container / Representational Pattern 
 	
 	- [ ] Module Pattern
 	
@@ -58,7 +61,7 @@
 	
 	- [ ] Render Props Pattern (know what it is)
 	
-	- [ ] HOC Pattern (legacy but common in older code-bases)
+	- [ ] HOC Pattern 
 	
 	- [ ] Factory Pattern (optional but useful)
 
