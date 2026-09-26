@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 export const Functoins_what_do_they_know_do_they_know_things_lets_find_out =
   () => {
     function myFilter(arr, predict) {

@@ -1,8 +1,9 @@
+import { useEffect, useLayoutEffect } from "react"
+import { Child } from "./reactChild"
 
 
-export const B = () => {
-    return (
-        <>
-        </>
-    )
+
+
+export const B = ({ name, url }) => {
+
 }

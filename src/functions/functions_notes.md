@@ -451,7 +451,6 @@ Private property accessor methods using closures --->
 
 let object_retuner = function(){
     let value;
-
     retrun{
         set: function(arg){
             return arg = value;
