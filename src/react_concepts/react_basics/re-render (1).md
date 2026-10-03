@@ -28,8 +28,7 @@
   * elements with diffrent type : 
     * tears down the whole tree and rebuild a new one 
 * Updating a Fiber in Place
-  * after an update (before commit phase during render phase ) react updates the  work in progress tree by reconciling between the currnet fiber tree and the new elements fibers  ,  react flags the relevent fiber that needs work 
-
+  * after an update (before commit phase during render phase ) re-render produces  (work in progress tree) in reconciliation that is compared to the latest commit (current fiber tree) 
 ## Keys and Component Identity
 
 * How `key` Affects Reconciliation
@@ -48,7 +47,7 @@
 * Why Array Indexes Make Bad Keys
   * react may associate wrong data with wrong elements 
 * Reordering, Inserting, and Removing with Index Keys
-  * if index is used as keys insertion , deletion ... causes keys to be changed which deafets the idea of stablity that comes with using keys 
+  * if index is used as keys insertion , deletion ... causes keys to be changed which deafets the purpose of keys (stablity that comes with using keys )
 
 ## Changing Keys and Forced Remounts
 

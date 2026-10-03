@@ -4,7 +4,7 @@
 ## React’s Core Building Blocks
 
 * React Element vs Component vs Fiber vs DOM Node
-* 
+  
 
 
   * ### react Element : 
@@ -20,7 +20,7 @@ the actual browser object that represents an HTML element
     <h1> hello </h1> : h1 and 'hello' are both dom nodes but only h1 is a dom element
 
 * ### react-fiber-architecture in mounting :
-**fiber** is a plain js object , created initially in the mounting phase per component
+**fiber** is a plain JS object , created initially in the mounting phase per component
 react's own internal tree of objects ,  preserved through re-renders ,  determines
 identity , tree position , content , instance , scheduling - priority of updates ,
 
@@ -34,14 +34,14 @@ identity , tree position , content , instance , scheduling - priority of updates
   * Context Changes
   * External Store Updates
   * Force Updates
-  * Other Sources of Updates
+  * Other Sources of Updates // they trigger an update
 * Render Phase
-  * render decides what SHOULD be shown; it's in the commit phase  that actually touches the browser.
+  * render decides what SHOULD be shown; it's in the commit phase  that actually react touches the browser.
   * render is pure computation
   * react calling component to show shit in the browser 
     * on initial render react calls the root 
     * on subsequent re-renders , react calls the components that triggerd a re-render 
-      * the process is recusrsive , react call the component and their children and their children ...
+      * the process is recusrsive , react calls the component and their children and their children ...
       * during re-render react calculates to see if anything changed (won't give a shit till commit phase)
 * Commit Phase
   * react modifies the DOM 
@@ -50,15 +50,15 @@ identity , tree position , content , instance , scheduling - priority of updates
 
 ## Render vs DOM Update vs Browser Paint
 
-*  Re-render Doesn’t Necessarily Change the DOM , an state update can have no visual effect on the
+*  re-render  doesn't Necessarily Change the DOM , an state update can have no visual effect on the
  
    app ,  a Render can Produce Zero Visible Change , rendering and commiting are seperate , bc
 
-   react diifs (compare / an operation i'll note it in re-rendering) new output against what (work in progress fiber tree) vs what already been commited (current fiber tree )and only writes what has changed 
+   react diifs  new output against what (work in progress fiber tree) vs what already been commited (current fiber tree )and only writes what has changed 
   
 * DOM Change Doesn’t Necessarily Mean an Immediate Repaint :
   
-  * A DOM mutation basically promises a future repaint , browser doesnt repaint after 
+  * A DOM mutation basically promises a future repaint , browser doesn't repaintright  after 
    every single dom mutation , it combines everyThing that happend on the current task and repaints once on the next frame 
  
 
@@ -101,14 +101,18 @@ Render
   ↓
 Commit
   │
-  ├── DOM changes
-  |__ ref attachment
+  DOM changes
+  | DOM changes
+  ref attachment
+  |
+  useLayoutEffect
   └── useLayoutEffect
   ↓
 Browser paint
   ↓
 Remaining Effects
   └── useEffect
+  ### DOM gets mutated first, refs get attached next (so `.current` already points at the real node), and only then do layout effects run — exactly why it's safe to read `ref.current` inside one. Three sequential steps, not three parallel ones.
 
 ## `useLayoutEffect` vs `useEffect`
 
@@ -124,7 +128,7 @@ Remaining Effects
     `function init(){ return (0) }`
     `const [num,setNum] = useState(init())` `// to resolve the intial value init is called by js on every render `
     * lazy Initialization : 
-        `useState(init) or useState(()=>init())` `// passing a refrence of a function instead of an invocation makes useState call init once on initial render only `
+        `useState(init) or useState(()=>{return init()})` `// passing a refrence of a function instead of an invocation makes useState call init once on initial render only `
     * the diffrence is js has to deal with this invocation init() then does the whole react stuff on every render before react does it's thing , whereas in lazy-initiliazation react decides to evaluate init refrence at initial render 
     * by passing a refrence instead of invocation react will only call the function at the initial render instead of executing it on every render 
     * it's best used for expensive computation :
@@ -139,7 +143,7 @@ Remaining Effects
 * Child Effects vs Parent Effects
 * Layout Effect Ordering
 * Passive Effect Ordering
-  * buttom up first in both cases 
+  * buttom up first :   
    output : 
  `` child effects ran
   parent effects ran

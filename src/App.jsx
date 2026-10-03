@@ -1,38 +1,37 @@
-import { useState, useEffect, useReducer, useRef, useLayoutEffect } from "react"
-import { Custom_Input } from "./react_concepts/utils"
-import { Arreys_what_do_they_know_do_they_know_things_lets_find_out } from "./arreys/every_arrey_methode_everyWhere_all_at_Once"
-import { Functoins_what_do_they_know_do_they_know_things_lets_find_out } from "./functions/functions_everyWhere_all_at_Once"
-import { Data } from "./react_concepts/assets"
-import { Display } from "./react_concepts/Props_Handling"
-import { B } from "./react_concepts/children/react_props"
-import { Child } from "./react_concepts/children/reactChild"
+import { useEffect, useState } from "react";
+import { Data } from "./fetchData";
+import { SearchField } from "./searchField";
+import { SearchResults } from "./searchResults";
+import { useRef } from "react";
+import { ChildrenArrey } from "./childrenFetch";
 
-
-function App() {
+const App = () => {
   const [data, setData] = useState([])
-  const [search, setSearchTerm] = useState(localStorage.getItem('searchTerm') ?? '')
+  const [pokie,setPokie] = useState([])
+  const [searchTerm, setSearchTerm] = useState([])
+  const dataHandler = (arr) => {
+    setData(arr)
+  }
+  const searchTermHandler = (e) => {
+    setSearchTerm(e.target.value)
+  }
+  const pokieHandler = (pokiemon) => {
+    setPokie(pokiemon)
+  }
   useEffect(() => {
-    localStorage.setItem('searchTerm', search)
-  }, [])
+    console.log(pokie)
+  },[pokie])
+ 
 
-  const handleData = d => setData((prev) => prev = d);
-  const handleSearchTerm = event => setSearchTerm((prev) => prev = event.target.value)
+
   return (
     <>
-      <Arreys_what_do_they_know_do_they_know_things_lets_find_out/>
-      <Functoins_what_do_they_know_do_they_know_things_lets_find_out />
-      <Data handleData={handleData} />
-      <Custom_Input
-        name = 'search'
-        value={search}
-        onChangeInput={handleSearchTerm}
-      />
-      <B>
-        <Child/>
-      </B>
-      <Display data={data} handleData={(d)=>handleData(d) } search={search} />
-      
-    </>
+      <h1>App</h1>
+      <Data dataHandler={dataHandler} />
+      <ChildrenArrey data={data} pokieHandler={pokieHandler}/>
+      <SearchField searchTerm={searchTerm} searchTermHandler={searchTermHandler} />
+      <SearchResults data={data}  />
+    </> 
   )
-}
-export default App
+ }
+export default App;
