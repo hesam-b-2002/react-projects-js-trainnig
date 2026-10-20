@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 
-export const SearchResults = () => {
+export const SearchResults = ({ data }) => {
  
 
 }

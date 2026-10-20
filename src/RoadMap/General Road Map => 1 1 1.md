@@ -1,98 +1,93 @@
-- [ ] java-script definitive  guide 
-	- [x] function chapter 
-		- [x] H_O_F
-		- [x] partial Application
-		- [x] Memoziation
-	- [ ] classes chapter 
-	- [ ] object chapter 
-	- [ ] object originated programming
-	- [ ] standard library 
-	- [ ] iterators and generators 
-	- [ ] asynchronous data
-	- [ ] meta Programming
-	- [ ] java-script in web-browser 
-	- [ ] server side js with node- 
-	- [ ] tools and extension
-- [ ] coursera  meta  front end development 
-	- [ ] Principles of UX/UI Design
-	- [ ] Front-End Developer Capstone
-	- [ ] Coding Interview Preparation
+- [ ] java-script definitive guide
+  - [ ] function chapter
+    - [x] H_O_F
+      - [x] monkey patching
+      - [x] currying
+      - [x] composition
+      - [x] piping
+      - [x] factory function
+    - [x] partial Application
+    - [x] Memoziation
+    - [x] recursion
+  - [ ] classes chapter
+  - [ ] object chapter
+  - [ ] object oriented programming
+  - [ ] standard library
+  - [ ] iterators and generators
+  - [ ] asynchronous js
+    - [ ] Timers (setTimeout, setInterval)
+    - [ ] Promises
+      - [ ] Using promises: .then, .catch, .finally
+      - [ ] Chaining promises: return values, returning promises
+      - [ ] Resolving promises: the resolved vs. fulfilled distinction
+      - [ ] `errors: propagation, recovery, rethrowing
+      - [ ] Promises in parallel: Promise.all, allSettled, race, any
+      - [ ] Making promises: new Promise, wrapping callback APIs
+      - [ ] Promises in sequence: running async steps one after another`
+    - [ ] async and await
+      - [ ] await expressions
+      - [ ] async functions
+      - [ ] Awaiting multiple promises (await Promise.all)
+  - [ ] meta Programming
+  - [ ] java-script in web-browser
+  - [ ] server side js with node-
+  - [ ] tools and extension
+- [ ] coursera meta front end development
+  - [ ] Principles of UX/UI Design
+  - [ ] Front-End Developer Capstone
+  - [ ] Coding Interview Preparation
 
-- [ ] Road to react 
-	 - [ ] Fundamentals of React
-		 - [x] React Props
-		 - [x] React State
-		 - [x] Callback Handlers in JSX
-		 - [x] Lifting State in React
-		 - [ ] React Controlled Components
-		 - [ ] Props Handling (Advanced)
-		 - [ ] React Side-Effects
-		 - [ ] React Custom Hooks (Advanced)
-		 - [ ] React Fragments
-		 - [ ] Reusable React Component
-		 - [ ] Imperative React
-		 - [ ] React Asynchronous Data	
-		 - [ ] React Conditional Rendering
-		 - [ ] React Advanced State(use_reducer( ))
-		 - [ ] Data Fetching with React
-		 - [ ] Data Re-Fetching in React
-		 - [ ] Memorized Handler in React (Advanced)
-		 - [ ] Explicit Data Fetching with React 
-		 - [ ] Third-Party Libraries in React 
-		 - [ ] Async/Await in React (Advanced)
-	- [ ] React’s Legacy
-	- [ ] Styling in React
-	 - [ ] React Maintenance 
-	- [ ] Real World React (Advanced)
-	- [ ] Deploying a React Application
-
+- [ ] Road to react
+  - [ ] Fundamentals of React
+    - [ ] react hooks review
+    - [x] React Props
+    - [x] React State
+    - [x] Callback Handlers in JSX
+    - [x] Lifting State in React
+    - [x] React Controlled Components
+    - [x] Props Handling (Advanced)
+    - [x] React Side-Effects
+    - [ ] React Custom Hooks (Advanced)
+    - [ ] React Fragments
+    - [ ] Reusable React Component
+    - [ ] Imperative React
+    - [ ] React Asynchronous Data
+    - [ ] React Conditional Rendering
+    - [ ] React Advanced State(use_reducer( ))
+    - [ ] Data Fetching with React
+    - [ ] Data Re-Fetching in React
+    - [ ] Memorized Handler in React (Advanced)
+    - [ ] Explicit Data Fetching with React
+    - [ ] Third-Party Libraries in React
+    - [ ] Async/Await in React (Advanced)
+  - [ ] React’s Legacy
+  - [ ] Styling in React
+  - [ ] React Maintenance
+  - [ ] Real World React (Advanced)
+  - [ ] Deploying a React Application
 - [ ] React Patterns
-	- [ ] Overview of React.js
-	
-	- [ ] Provider Pattern
-	
-	- [ ] Container / Representational Pattern 
-	
-	- [ ] Module Pattern
-	
-	- [ ] Hooks Pattern
-	
-	- [ ] Compound Pattern
-	
-	- [ ] Render Props Pattern (know what it is)
-	
-	- [ ] HOC Pattern 
-	
-	- [ ] Factory Pattern (optional but useful)
-
-
+  - [ ] Overview of React.js
+  - [ ] Provider Pattern
+  - [ ] Container / Representational Pattern
+  - [ ] Module Pattern
+  - [ ] Hooks Pattern
+  - [ ] Compound Pattern
+  - [ ] Render Props Pattern
+  - [ ] HOC Pattern
+  - [ ] Factory Pattern
 - [ ] Next.js Fundamentals
-	- [ ] Overview of Next.js
-	
-	- [ ] Client-side Rendering
-	
-	- [ ] Server-side Rendering
-	
-	- [ ] Static Rendering
-	
-	 - [ ] incremental Static Generation
-	
-	- [ ] React Server Components
-	
-	- [ ] Selective Hydration
-
-
+  - [ ] Overview of Next.js
+  - [ ] Client-side Rendering
+  - [ ] Server-side Rendering
+  - [ ] Static Rendering
+  - [ ] incremental Static Generation
+  - [ ] React Server Components
+  - [ ] Selective Hydration
 - [ ] Performance
-	- [ ] Bundle Splitting
-	
-	 - [ ] Route Based Splitting
-	
-	- [ ] Tree Shaking
-	
-	- [ ] Dynamic Import
-	
-	 - [ ] Static Import
-	
-	 - [ ] Optimizing for Core Web Vitals
-	
-	- [ ] List Virtualization
+  - [ ] Bundle Splitting
+  - [ ] Route Based Splitting
+  - [ ] Tree Shaking
+  - [ ] Dynamic Import
+  - [ ] Static Import
+  - [ ] Optimizing for Core Web Vitals
+  - [ ] List Virtualization
