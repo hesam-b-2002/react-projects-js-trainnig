@@ -4,6 +4,7 @@ import { SearchField } from "./searchField";
 import { SearchResults } from "./searchResults";
 import { useRef } from "react";
 import { ChildrenArrey } from "./childrenFetch";
+import { AsyncronusJS } from "./js_AsynchronousGame";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -14,7 +15,6 @@ const App = () => {
   const searchTermHandler = (e) => {
     setSearchTerm(e.target.value);
   };
-
   return (
     <>
       <h1>App</h1>
@@ -24,6 +24,7 @@ const App = () => {
         searchTerm={searchTerm}
         searchTermHandler={searchTermHandler}
       />
+      <AsyncronusJS />
       <SearchResults data={data} />
     </>
   );
