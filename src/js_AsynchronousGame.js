@@ -1,6 +1,10 @@
 import { resume } from "react-dom/server";
 
 export const AsyncronusJS = () => {
+  const onAggError = (errors, stack, message) => {
+    let aggErr = new AggregateError(errors, message, stack);
+    throw aggErr;
+  };
   const delay = (ms, value) =>
     new Promise((resolve) => setTimeout(() => resolve(value), ms));
   const failAfter = (ms, reason) =>
@@ -28,70 +32,61 @@ export const AsyncronusJS = () => {
         ),
     );
   }
+  const onResolve = (p) => Promise.resolve(p);
+  const onReject = (p) => Promise.reject(p);
   function withTimeout(promise, ms) {
-    let p = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("times up")), ms),
-    );
-    return Promise.race([promise, p]);
+    let fail = new Promise((___, reject) => {
+      setTimeout(() => reject(promise), ms);
+    });
+    return Promise.race([promise, fail]);
   } // promise fulfilled or is rejected after ms
-  function firstSuccess(params) {
-    return Promise.any(params.map((param) => param()));
+  async function firstSuccess(params) {
+    let promiseArr = await params.map((param) => param());
+    return Promise.race(promiseArr);
   } // fulfills with the first param to fulfill
-  async function loadAll(params) {} // returns a promise that fulfills with the object {ok:[],failed:[]}
-  async function sequential(params) {
-    let results = [];
-    for (let fn of params) {
-      let res = await fn();
-      results.push(res);
-    }
-    return results;
-  } // runs couple of functions(they return promises) sequentially
-  async function paralell(params) {
-    let p = await Promise.all(params.forEach((param) => param()));
-    return p;
-  } // runs couple of functions(they return promises) sequentially
 
+  async function loadAll(params) {} // returns a promise that fulfills with the object {ok:[],failed:[]}
+  async function sequentiall(params) {} // runs couple of functions(they return promises) sequentially
+
+  async function paralell(params) {} // runs couple of functions(they return promises) sequentially
   //  write them ur self :
 
   function retry() {}
 
-  const arr = [failAfter(20, "a"), failAfter(15, "b"), failAfter(25, "c")];
-  const onResolve = (p) => Promise.resolve(p);
-  const onReject = (p) => Promise.reject(p);
   // fulfills with the fulfilled value of the arrey async tasks passed tpo it , rejects with one element rejecting
   function myAll(asyncTasks) {
     let p = Promise.resolve(),
-      res = [];
+      results = [];
     for (let promise of asyncTasks) {
-      p = p.then(
-        () =>
+      p = p
+        .then(() =>
           onResolve(promise)
-            .then((r) => res.push(r))
-            .then(() => onResolve(res)),
-        (err) => onReject(err),
-      );
+            .then((r) => results.push(r))
+            .then(() => onResolve(results)),
+        )
+        .catch((r) => onReject(r));
     }
     return p;
   }
+
   // returns a promise that settles wiht the first promise (param) to settle(fulfill/reject)
   // what if i call all the promises sequntially , see which one fulfills or rejects faster and return that one  , trace their completion time?
   function myRace(promises) {
-    let p = Promise.resolve(),
-      err = [],
-      res = [];
-
+    let result = [];
+    let p = Promise.resolve();
+    // im gonna go through the promises and resolve them one by one in order of completion not the order they are orginally in
     for (let promise of promises) {
-      p = onResolve(promise).then(
-        (r) => res.push(r),
-        (rej) => {
-          err.push(rej);
-          return onReject(err[0]);
-        },
-      );
+      p = onResolve(promise)
+        .then(
+          (success) => result.push(onResolve(success)),
+          (failed) => result.push(onReject(failed)), //this way they get added into a arrey as resolved or rejected promises
+        )
+        .then(() => onResolve(result[0]));
     }
-
-    return p.then(() => onResolve(res));
+    return p; // i spent three days trying to solve this , all i needed was to assign the resolved promise to p ,
+    //  then return p , so p would return as an undefined pendong promise then after my async operation is over would get assigned a settled promise
   }
+  // myAny() :
   // returns a promise that fulfills with the first promise one to fulfill , rejects if all the async params reject
   // rejection output :
   // AggregateError: All promises were rejected
@@ -99,41 +94,42 @@ export const AsyncronusJS = () => {
   // : (3) ['a', 'b', 'c']
   // message :"All promises were rejected"
   // stack:"AggregateError: All promises were rejected"
-  const onAggError = (errors, stack, message) => {
-    stack = "AggregateError: All promises were rejected";
-    message = "All promises were rejected";
-    let aggErr = new AggregateError([errors], message, stack);
-    throw aggErr;
-  };
+
   function myAny(promises) {
-    let p = Promise.resolve(),
-      res = [],
-      err = [];
+    let success = [],
+      fail = [],
+      p = Promise.resolve();
 
     for (let promise of promises) {
       p = onResolve(promise).then(
-        (r) => res.push(r),
-        (rej) => {
-          err.push(rej);
-          if (err.length === promises.length) {
-            console.log(err.length);
-            return onReject(onAggError(err));
+        (s) => {
+          success.push(onResolve(s));
+          return onResolve(success[0]);
+        },
+        (f) => {
+          fail.push(f);
+          if (fail.length === promises.length) {
+            return onAggError(fail, "All promises were rejected");
           }
         },
       );
     }
 
-    return p.then(() => onResolve(res[0]));
+    return p;
   }
-  function myAllSettled(promises) {
-    let p = Promise.resolve(),
-      res = [];
+  async function myAllSettled(promises) {
+    let result = [];
+    let p = Promise.resolve();
     for (let promise of promises) {
-      p = onResolve(promise).then(
-        (r) => res.push({ [`status`]: "fulfilled", [`value`]: r }),
-        (rej) => res.push({ [`status`]: "rejected", [`reason`]: rej }),
+      await onResolve(promise).then(
+        (value) => result.push({ [`status`]: `fulfilled`, [`value`]: value }),
+        (reason) => result.push({ ["status"]: `rejected`, [`reason`]: reason }),
       );
     }
-    return p.then(() => onResolve(res));
+    return p.then(() => onResolve(result));
   }
+  let arg = [delay(20, "a"), failAfter(20, "b"), delay(20, "c")];
+  let staticMethode = Promise.allSettled(arg);
+  let myMethode = myAllSettled(arg);
+  console.log(`static methode :`, staticMethode, `myMethode : `, myMethode);
 };

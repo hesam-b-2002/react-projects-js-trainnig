@@ -21,18 +21,18 @@ returns an id , which u can use to set off the timer preventing the function to 
     A promise represents a value that isn't ready yet , is an object representing the result of a computation ,
     the future result of a single asynchronous computation
 
-#### new Promis() :
+#### new Promise() :
 
 takes one executer function that takes two args =>
-new Promis(`function Executer(function resolve ,function reject)=>{}`)
+new Promise(`function Executer(function resolve ,function reject)=>{}`)
 
-- resolve(value); // the result you want user to receive
+- resolve(value); // the result you want to use
 - reject(reason); // why it failed, conventionally throwing an Error object
 
 #### Nesting :
 
 the rule is promises are flatend :
-new Promis((resolve,reject)==>resolve(new promis(reolve(new Promis(resolve)=>,,,,))))
+new Promise((resolve,reject)==>resolve(new promise(reolve(new Promise(resolve)=>,,,,))))
 if i go 10 promises deep , p10 travels upwards , so p1 is setteled with the same value as p10
 
 - .then(callBackFunc()) :
@@ -43,45 +43,44 @@ if i go 10 promises deep , p10 travels upwards , so p1 is setteled with the same
 - .catch() :
   is shorthand for .then(null,callBackFunc())
 
-`fetch(url) ` // task1 : returns promis 1
-`.then((r)=>r.Json() / r.text())` // task2 : returns promis 2
-`.then(c2)` //task3 : returns promis 3
+`fetch(url) ` // task1 : returns promise 1
+`.then((r)=>r.Json() / r.text())` // task2 : returns promise 2
+`.then(c2)` //task3 : returns promise 3
 
-- resolved vs fulfilled : a promis is an object with state and value :
-  - state : a promis is either pending / resolved / rejected
-  - value : plain value when promis resolves and a reason when it rejects
-- when the value returned by a callBack is not a promis , that promis is considerd fulfilled
+- resolved vs fulfilled : a promise is an object with state and value :
+  - state : a promise is either pending / resolved / rejected
+  - value : plain value when promise resolves and a reason when it rejects
+- when the value returned by a callBack is not a promise , that promise is considerd fulfilled
 
-1. `fetch(url)` initiates HTTP Get request , returns `p1` , a pending promis
-2. `c1` is registerd on `p1` retunrs `p2` , pending promis
-3. `c2` is registed on p2 retunrs `p3` (this three steps happen synchronously) . pend
-   ing promis
+1. `fetch(url)` initiates HTTP Get request , returns `p1` , a pending promise
+2. `c1` is registerd on `p1` retunrs `p2` , pending promise
+3. `c2` is registed on p2 retunrs `p3` (this three steps happen synchronously) . pending promise
    some asynchronous time later response object(status and headers) arrives
 
-4. `p1` is `fulfilled` with status and headers (sinc it's returning an actual object ), wraps them into a response `c1` is called on it
-5. `c1` is invoked , the `json() / text() / ...` is called , parsing response body is asynchrouns , these methodes always return a promis , so json() returns `p4` so `c1` retunres a pending promis , `p2` and `p4` now they are locked to each-other , p2 waiting on p4 to be fulfilled
+4. `p1` is `fulfilled` with status and headers (since it's returning an plain object ), wraps them into a response `c1` is called on it
+5. `c1` is invoked , the `json() / text() / ...` is called , parsing response body is asynchrouns , these methodes always return a promise , so json() returns `p4` so `c1` retunres a pending promise , `p2` and `p4` now they are locked to each-other , p2 waiting on p4 to be fulfilled
 
-- (this follows the rules of promis nesting , stating , promis callbacks that also return the promis get queid )
+- (this follows the rules of promise nesting , stating : **promise callbacks that also return a promise get queid )**
   some asynchronous time later response body arrives
 
-6. `p4` is fulfilled with respons body , `c1` is invoked with parsed body so `p2` is fulfilled since it returns a value that is not a pending promis
-7. `c2` is invoked on `p2` fulfilled promis , returns some shit and is fulfilled
+1. `p4` is fulfilled with respons body , `c1` is invoked with parsed body so `p2` is fulfilled since it returns a value that is not a pending promise
+2. `c2` is invoked on `p2` fulfilled promise , returns some shit and is fulfilled
 
 ### Promise static methodes :
 
-1. .all() : takes an iterable as input (arrey of promises) , returns a single promis, rejects when the first Promis rejects (stops the operation and rejects ) , fulfills only when all of them fulfill , fulfills with an empty arrey , ignores non promis arrey elemnts returns them as they are
+1. .all() : takes an iterable as input (arrey of promises) , returns a single promise, rejects when the first Promise rejects (stops the operation and rejects ) , fulfills only when all of them fulfill , (fulfills with an empty arrey , ignores non promise arrey elemnts returns them as they are)
 
-2. .allKeyed() : takes an object as input , returns a single promis, , the promises are values associated with defined keys , rejects when the first one rejects , fulfills when all of them fulfills , key value pair ordering is preserved
-   `const {a,b,c} = await Promis.allKeyed({ a : a.get() , b : b.get() , c : c.get()})`
+2. .allKeyed() : takes an object as input , returns a single promise, , the promises are values associated with defined keys , rejects when the first one rejects , fulfills when all of them fulfills , key value pair ordering is preserved
+   `const {a,b,c} = await Promise.allKeyed({ a : a.get() , b : b.get() , c : c.get()})`
 
-3. .allSettled() : takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises settle , wheather fulfilled or rejected the fullfilment promis value is an iterable of objects regarding each promis:
+3. .allSettled() : takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises settle , wheather fulfilled or rejected the fullfilment e value is an iterable of objects regarding each promis:
    `   {
-value : the value each Promis was fulfilled with (only if fulfilled),
+value : the value each Promise was fulfilled with (only if fulfilled),
 status : string (fullfilled , rejected) on fulfillment or rejection,
-reason : the reason the promis was  rejected with  
+reason : the reason the promise was rejected with  
 }`
 
-4. .allSettledKeyed() : `.allKeyed()` , `.allSettled()` combo , takes an object as input in contrast to allKeyed() doesnt care if a promis value rejects keeps going and marks all promis values associated with each key
+4. .allSettledKeyed() : `.allKeyed()` , `.allSettled()` combo , takes an object as input in contrast to allKeyed() doesnt care if a promise value rejects keeps going and marks all promise values associated with each key
 
 5. .any() : takes an iterable , fulfills on the first one fulfilled then returns this value , rejects when all promises in the iterable reject returns AggregateError(containing an array of rejection reasons in its errors property.) , always rejects on an empty arrey
 
@@ -89,7 +88,7 @@ reason : the reason the promis was  rejected with
 
 7. .reject() : Takes a single value as an arg returns a promise that will be rejected with that value
 
-8. .resolve() : Takes a single value as an arg returns a promise that will be resolved with that value , (**.resolve()/.reject\*() both return promises so are both thenable , however this methodes will immediatly be fulfilled or rejected after the synchornus chunk has finished runnin**) their value is computed synchronously but assigned asynchronously
+8. .resolve() : Takes a single value as an arg returns a promise that will be resolved with that value , (**.resolve()/.reject\*() both return fulfilled promises syncronously so are both thenable ,**)
 
 9. .withResolvers()
 
