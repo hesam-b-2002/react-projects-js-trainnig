@@ -128,8 +128,4 @@ export const AsyncronusJS = () => {
     }
     return p.then(() => onResolve(result));
   }
-  let arg = [delay(20, "a"), failAfter(20, "b"), delay(20, "c")];
-  let staticMethode = Promise.allSettled(arg);
-  let myMethode = myAllSettled(arg);
-  console.log(`static methode :`, staticMethode, `myMethode : `, myMethode);
 };

@@ -1,32 +1,42 @@
-import { useEffect, useState } from "react";
-import { Data } from "./fetchData";
-import { SearchField } from "./searchField";
-import { SearchResults } from "./searchResults";
-import { useRef } from "react";
-import { ChildrenArrey } from "./childrenFetch";
-import { AsyncronusJS } from "./js_AsynchronousGame";
+import { useState, useEffect, useContext } from "react";
+import { MainArea } from "./training_grounds/mainArea";
+import { SideBar } from "./training_grounds/sideBar";
+import { BottomArea } from "./training_grounds/bottomArea";
+import "./App.css";
+import LoadingScreen from "./training_grounds/LoadinScreen";
 
 const App = () => {
-  const [data, setData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState([]);
-  const dataHandler = (arr) => {
-    setData(arr);
-  };
-  const searchTermHandler = (e) => {
-    setSearchTerm(e.target.value);
-  };
   return (
-    <>
-      <h1>App</h1>
-      <Data dataHandler={dataHandler} />
-      <ChildrenArrey data={data} />
-      <SearchField
-        searchTerm={searchTerm}
-        searchTermHandler={searchTermHandler}
-      />
-      <AsyncronusJS />
-      <SearchResults data={data} />
-    </>
+    <div className="app">
+      <main className="main-area">
+        <MainArea />
+      </main>
+      <aside className="side-bar">
+        <SideBar />
+      </aside>
+      <LoadingScreen />
+      <footer className="bottom-area">
+        <BottomArea />
+      </footer>{" "}
+    </div>
   );
 };
+
 export default App;
+// <div className="app">
+//   <Page>
+//     <main className="main-area">
+//       <MainArea />
+//     </main>
+//     <aside className="side-bar">
+//       <SideBar />
+//     </aside>
+//     <footer className="bottom-area">
+//       <BottomArea />
+//     </footer>
+//   </Page>
+// </div>
+// write a custom component to fetch data and push it into an arrey
+// it should handle loading and fetching
+// write a three part part app , side bar , main(pictures) , attributes(strings)
+// they all come from the same url
