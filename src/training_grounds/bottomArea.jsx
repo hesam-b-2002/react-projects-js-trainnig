@@ -1,5 +1,3 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-export const BottomArea = () => {
-  return <h1>bottom area</h1>;
-};
+export const BottomArea = () => {};
